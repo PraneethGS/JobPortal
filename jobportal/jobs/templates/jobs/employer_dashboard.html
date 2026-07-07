@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Employer Dashboard</h2>
+
+<a class="btn btn-primary" href="{% url 'company_profile' %}">
+Edit Company
+</a>
+
+<a class="btn btn-primary" href="{% url 'create_job' %}">
+Add Job
+</a>
+
+<br><br>
+
+{% for job in jobs %}
+<div class="card">
+    <h3>{{ job.title }}</h3>
+    <p>{{ job.location }}</p>
+    <div style="margin-top:8px">
+        <a class="btn btn-secondary" href="{% url 'view_applicants' job.id %}">View Applicants</a>
+        <a class="btn btn-danger confirm-link" href="{% url 'delete_job' job.id %}">Delete</a>
+    </div>
+        {% with apps=job.application_set.all %}
+            {% if apps %}
+                <div class="card" style="margin-top:12px;padding:12px;background:#fbfbfd">
+                    <h4>Applicants ({{ apps|length }})</h4>
+                    {% for app in apps %}
+                        <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #f0f0f0">
+                            <div style="flex:1">
+                                <strong>{{ app.applicant.username }}</strong>
+                                <div class="muted">Applied on {{ app.applied_at }}</div>
+                            </div>
+                            <div style="display:flex;gap:8px;align-items:center">
+                                <span class="badge {{ app.status }}">{{ app.status }}</span>
+                                {% if app.resume %}<a class="muted" href="{{ app.resume.url }}" target="_blank">Download</a>{% endif %}
+                                <a class="btn btn-primary" href="{% url 'application_detail' app.id %}">Open</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+</div>
+{% empty %}
+<p>No jobs yet.</p>
+{% endfor %}
+
+{% endblock %}

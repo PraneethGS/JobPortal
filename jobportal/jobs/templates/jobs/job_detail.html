@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+    <h2>{{ job.title }}</h2>
+    <p class="muted"><strong>Location:</strong> {{ job.location }}</p>
+    <p>{{ job.description }}</p>
+    <p class="muted"><strong>Employer:</strong> {{ job.employer.username }}</p>
+
+    {% if user.is_authenticated and user.user_type == 'jobseeker' %}
+        <a class="btn btn-primary" href="{% url 'apply_job' job.id %}">Apply</a>
+    {% endif %}
+
+    {% if user == job.employer %}
+        <a class="btn btn-danger confirm-link" href="{% url 'delete_job' job.id %}">Delete</a>
+    {% endif %}
+</div>
+
+{% endblock %}

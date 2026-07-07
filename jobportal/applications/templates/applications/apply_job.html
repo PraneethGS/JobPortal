@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Apply for {{ job.title }}</h2>
+
+<div class="card">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if editing %}
+            <h3>Edit Application for {{ job.title }}</h3>
+        {% else %}
+            <h3>Apply for {{ job.title }}</h3>
+        {% endif %}
+
+        <label>Your Resume / Cover Letter</label>
+        {{ form.message }}
+        {% if form.message.errors %}
+            <div class="muted">{{ form.message.errors }}</div>
+        {% endif %}
+
+        <label>Upload Resume (optional)</label>
+        {{ form.resume }}
+        {% if form.resume.errors %}
+            <div class="muted">{{ form.resume.errors }}</div>
+        {% endif %}
+
+        {% if form.instance.resume %}
+            <p class="muted">Current file: <a href="{{ form.instance.resume.url }}" target="_blank">{{ form.instance.resume.name }}</a></p>
+        {% endif %}
+
+        <button class="btn btn-primary" type="submit">{% if editing %}Save Changes{% else %}Submit Application{% endif %}</button>
+    </form>
+</div>
+
+{% endblock %}

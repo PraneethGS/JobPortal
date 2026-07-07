@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Application for: {{ app.job.title }}</h2>
+
+    <p><strong>Applicant:</strong> {{ app.applicant.username }}</p>
+    <p class="muted"><strong>Applied on:</strong> {{ app.applied_at }}</p>
+
+    <h3>Resume / Message</h3>
+    <div class="card">
+        <p>{{ app.message|linebreaks }}</p>
+        {% if app.resume %}
+            <p><strong>Uploaded Resume:</strong> <a href="{{ app.resume.url }}" target="_blank">Download</a></p>
+        {% endif %}
+    </div>
+
+    {% if user == app.applicant %}
+        <form method="POST" action="{% url 'delete_application' app.id %}">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Delete Application</button>
+        </form>
+    {% endif %}
+
+</div>
+{% endblock %}

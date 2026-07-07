@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+  <h2>Delete Company</h2>
+  <p>Are you sure you want to delete the company: <strong>{{ company.name }}</strong>?</p>
+  <form method="POST">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Yes, delete</button>
+    <a class="btn btn-secondary" href="{% url 'company_profile' %}">Cancel</a>
+  </form>
+</div>
+
+{% endblock %}

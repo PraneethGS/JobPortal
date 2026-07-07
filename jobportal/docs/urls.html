@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Project URLs — Job Portal</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:24px;background:#f7f9fb;color:#111}
+    h1{color:#0b5ed7}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:10px;border:1px solid #e4e7eb;text-align:left}
+    th{background:#eef3ff}
+    .role{font-weight:700;color:#2b2b2b}
+    .note{color:#6b7280;font-size:13px}
+  </style>
+</head>
+<body>
+  <h1>Job Portal — URL Reference</h1>
+  <p class="note">Quick list of routes, their names, and which role typically uses them.</p>
+
+  <table>
+    <thead>
+      <tr><th>Path</th><th>Name</th><th>Role</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>/</td><td>home</td><td class="role">Public</td><td>Homepage</td></tr>
+      <tr><td>/users/register/</td><td>register</td><td class="role">Public</td><td>Register (choose employer/jobseeker)</td></tr>
+      <tr><td>/users/login/</td><td>login</td><td class="role">Public</td><td>Login</td></tr>
+      <tr><td>/users/logout/</td><td>logout</td><td class="role">Authenticated</td><td>Logout</td></tr>
+
+      <tr><td>/jobs/</td><td>job_list</td><td class="role">Public / Jobseeker</td><td>Browse jobs</td></tr>
+      <tr><td>/jobs/dashboard/</td><td>employer_dashboard</td><td class="role">Employer</td><td>View your jobs and applicants</td></tr>
+      <tr><td>/jobs/company/</td><td>company_profile</td><td class="role">Employer</td><td>Manage company profile</td></tr>
+      <tr><td>/jobs/create/</td><td>create_job</td><td class="role">Employer</td><td>Create job posting</td></tr>
+
+      <tr><td>/applications/apply/&lt;job_id&gt;/</td><td>apply_job</td><td class="role">Jobseeker</td><td>Apply to a job (text resume + optional file)</td></tr>
+      <tr><td>/applications/my/</td><td>my_applications</td><td class="role">Jobseeker</td><td>List your applications (view/edit/delete)</td></tr>
+      <tr><td>/applications/detail/&lt;app_id&gt;/</td><td>application_detail</td><td class="role">Applicant / Employer</td><td>View full application and resume</td></tr>
+      <tr><td>/applications/edit/&lt;app_id&gt;/</td><td>edit_application</td><td class="role">Jobseeker</td><td>Edit/replace resume and message</td></tr>
+      <tr><td>/applications/delete/&lt;app_id&gt;/</td><td>delete_application</td><td class="role">Jobseeker</td><td>Delete your application (removes file)</td></tr>
+      <tr><td>/applications/view/&lt;job_id&gt;/</td><td>view_applicants</td><td class="role">Employer</td><td>List applicants for a job</td></tr>
+      <tr><td>/applications/update/&lt;app_id&gt;/</td><td>update_status</td><td class="role">Employer</td><td>Update application status (pending/accepted/rejected)</td></tr>
+    </tbody>
+  </table>
+
+  <p class="note">File uploads are saved to <code>/media/resumes/</code> in development and require MIME types PDF/DOC/DOCX/TXT and size between 2–5 MB.</p>
+
+</body>
+</html>

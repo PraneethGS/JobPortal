@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Welcome to Job Portal</h2>
+
+    {% if user.is_authenticated %}
+            <p class="muted">Hello {{ user.username }} ({{ user.user_type }})</p>
+
+            {% if user.user_type == 'employer' %}
+                <a class="btn btn-primary" href="{% url 'employer_dashboard' %}">My Dashboard</a>
+                <a class="btn btn-secondary" href="{% url 'job_list' %}">View All Jobs</a>
+            {% else %}
+                <a class="btn btn-primary" href="{% url 'job_list' %}">Browse Jobs</a>
+                <a class="btn btn-secondary" href="{% url 'my_applications' %}">My Applications</a>
+            {% endif %}
+
+    {% else %}
+            <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+            <a class="btn btn-secondary" href="{% url 'register' %}">Register</a>
+    {% endif %}
+</div>
+{% endblock %}

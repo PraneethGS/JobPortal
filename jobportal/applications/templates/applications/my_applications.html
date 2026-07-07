@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Applications</h2>
+
+{% for app in applications %}
+    <div class="card">
+        <h3>{{ app.job.title }}</h3>
+        <p class="muted">Applied on {{ app.applied_at }}</p>
+        <div style="margin-top:8px">
+            <a class="btn btn-primary" href="{% url 'application_detail' app.id %}">View</a>
+            <a class="btn btn-secondary" href="{% url 'edit_application' app.id %}" style="margin-left:8px">Edit</a>
+            <form method="POST" action="{% url 'delete_application' app.id %}" style="display:inline-block;margin-left:8px">
+                {% csrf_token %}
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+{% empty %}
+    <p>No applications yet.</p>
+{% endfor %}
+
+{% endblock %}

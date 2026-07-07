@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Find Jobs</h2>
+
+<div class="search-box">
+    <form method="GET">
+        <input type="text" name="q" placeholder="Search jobs..." value="{{ query }}">
+        <button class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+{% for job in jobs %}
+<div class="card">
+    <h3>{{ job.title }}</h3>
+    <p><strong>Company:</strong> {{ job.company.name }}</p>
+    <p><strong>Location:</strong> {{ job.location }}</p>
+</div>
+{% empty %}
+<p>No jobs found.</p>
+{% endfor %}
+
+{% endblock %}

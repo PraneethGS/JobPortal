@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Create Job</h2>
+
+<div class="card">
+    <form method="POST">
+        {% csrf_token %}
+        <label>Company</label>
+        {{ form.company }}
+
+        <label>Title</label>
+        {{ form.title }}
+
+        <label>Location</label>
+        {{ form.location }}
+
+        <label>Description</label>
+        {{ form.description }}
+
+        <button class="btn btn-primary" type="submit">Post Job</button>
+    </form>
+</div>
+
+{% endblock %}
